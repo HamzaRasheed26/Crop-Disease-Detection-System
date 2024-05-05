@@ -14,7 +14,7 @@ def model_prediction(test_image):
 
 #Sidebar
 st.sidebar.title("Dashboard")
-app_mode = st.sidebar.selectbox("Select Page",["Home","About","Disease Detection"])
+app_mode = st.sidebar.selectbox("Select Page",["Home","About","Disease Detection", "Diseases Info"])
 
 #Main Page
 if(app_mode=="Home"):
@@ -64,6 +64,10 @@ elif(app_mode=="About"):
                 2. validation (17572  images)
                 3. test (33 images)
 
+                #### About the Developer
+                Hi, I'm Hamza Rasheed, a 3rd year Computer Science student at UET Lahore. I developed this Crop Disease Detection System under the supervision of Sir Samyan Qayyum Wahla and Chairman Usman Ghani. 
+                You can contact me via [GitHub](https://github.com/HamzaRasheed26) or [LinkedIn](https://www.linkedin.com/in/hamza-rasheed-9666b3237/).
+                If you have any questions, feedback, or suggestions, feel free to reach out to me at hamzarasheed19961@gmail.com.
                 """)
 
 #Prediction Page
@@ -93,3 +97,36 @@ elif(app_mode=="Disease Detection"):
                     'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus', 'Tomato___Tomato_mosaic_virus',
                       'Tomato___healthy']
         st.success("Model is Predicting it's a {}".format(class_name[result_index]))
+
+elif app_mode == "Diseases Info":
+    st.header("Diseases Info")
+
+    # Define a dictionary containing information about each disease
+    diseases_info = {
+        "Apple Diseases": ["Apple Scab", "Black Rot", "Cedar Apple Rust", "Healthy"],
+        "Blueberry Diseases": ["Healthy"],
+        "Cherry Diseases": ["Powdery Mildew", "Healthy"],
+        "Corn Diseases": ["Cercospora Leaf Spot", "Common Rust", "Northern Leaf Blight", "Healthy"],
+        "Grape Diseases": ["Black Rot", "Esca (Black Measles)", "Leaf Blight (Isariopsis Leaf Spot)", "Healthy"],
+        "Orange Diseases": ["Haunglongbing (Citrus greening)"],
+        "Peach Diseases": ["Bacterial Spot", "Healthy"],
+        "Pepper Bell Diseases": ["Bacterial Spot", "Healthy"],
+        "Potato Diseases": ["Early Blight", "Late Blight", "Healthy"],
+        "Raspberry Diseases": ["Healthy"],
+        "Soybean Diseases": ["Healthy"],
+        "Squash Diseases": ["Powdery Mildew"],
+        "Strawberry Diseases": ["Leaf Scorch", "Healthy"],
+        "Tomato Diseases": ["Bacterial Spot", "Early Blight", "Late Blight", "Leaf Mold", 
+                            "Septoria Leaf Spot", "Spider Mites", "Target Spot", 
+                            "Yellow Leaf Curl Virus", "Tomato Mosaic Virus", "Healthy"]
+    }
+
+    # Display disease information using interactive widgets
+    selected_disease = st.selectbox("Select a Disease", list(diseases_info.keys()))
+
+    if selected_disease:
+        st.subheader(selected_disease)
+        # Display symptoms of the selected disease
+        if selected_disease in diseases_info:
+            for symptom in diseases_info[selected_disease]:
+                st.write(f"- {symptom}")
